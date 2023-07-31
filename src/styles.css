@@ -1,0 +1,58 @@
+@import "https://unpkg.com/modern-normalize@2.0.0/modern-normalize.css";
+
+oom-comments {
+  display: block;
+  padding: 2em;
+  line-height: 1.5;
+}
+oom-comments ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+oom-comments li {
+  margin: 32px 0;
+}
+oom-comments article {
+  max-width: 600px;
+}
+oom-comments ul ul {
+  margin-left: 64px;
+}
+oom-comments .comment-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 6px;
+  float: left;
+  margin-right: 14px;
+  box-shadow: 0 0 1px #0009;
+}
+oom-comments .comment-user {
+  color: currentColor;
+  text-decoration: none;
+  display: block;
+}
+oom-comments .comment-user:hover {
+  text-decoration: underline;
+}
+oom-comments .comment-username {
+  margin-right: .5em;
+}
+oom-comments .comment-useraddress {
+  color: gray;
+  font-size: small;
+  font-style: normal;
+}
+oom-comments .comment-time {
+}
+oom-comments .comment-address {
+  color: currentColor;
+  text-decoration: none;
+  display: block;
+}
+oom-comments .comment-body {
+  margin-left: 64px;
+}
+oom-comments .comment-body p {
+  margin: 0.5em 0;
+}
