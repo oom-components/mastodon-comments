@@ -3,7 +3,6 @@
 oom-comments {
   display: block;
   padding: 2em;
-  line-height: 1.5;
 }
 oom-comments ul {
   list-style: none;
@@ -32,7 +31,7 @@ oom-comments .comment-user {
   text-decoration: none;
   display: block;
 }
-oom-comments .comment-user:hover {
+oom-comments .comment-user:hover .comment-username {
   text-decoration: underline;
 }
 oom-comments .comment-username {
@@ -44,15 +43,33 @@ oom-comments .comment-useraddress {
   font-style: normal;
 }
 oom-comments .comment-time {
+  font-size: small;
 }
 oom-comments .comment-address {
   color: currentColor;
   text-decoration: none;
   display: block;
+  margin-top: .25em;
+}
+oom-comments .comment-address:hover {
+  text-decoration: underline;
 }
 oom-comments .comment-body {
+  margin-top: .5em;
   margin-left: 64px;
+  line-height: 1.5;
 }
 oom-comments .comment-body p {
   margin: 0.5em 0;
+}
+oom-comments .comment-counts {
+  display: flex;
+  column-gap: 1em;
+  font-size: small;
+}
+oom-comments .comment-counts > span {
+  display: flex;
+  align-items: center;
+  column-gap: .3em;
+  color: gray;
 }

@@ -1,10 +1,32 @@
+// © https://phosphoricons.com/
+const icons = {
+  reblog:
+    `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="24"><polyline points="200 88 224 64 200 40"/><path d="M32,128A64,64,0,0,1,96,64H224"/><polyline points="56 168 32 192 56 216"/><path d="M224,128a64,64,0,0,1-64,64H32"/></svg>`,
+  favourite:
+    `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 256 256" fill="currentColor"><path d="M240,94c0,70-103.79,126.66-108.21,129a8,8,0,0,1-7.58,0C119.79,220.66,16,164,16,94A62.07,62.07,0,0,1,78,32c20.65,0,38.73,8.88,50,23.89C139.27,40.88,157.35,32,178,32A62.07,62.07,0,0,1,240,94Z"/></svg>`,
+};
+
+const dateTimeFormatter = new Intl.DateTimeFormat(
+  document.documentElement.lang || navigator.language || "en",
+  {
+    dateStyle: "medium",
+    timeStyle: "short",
+  },
+);
+
 export default class Mastodon extends HTMLElement {
   static get observedAttributes() {
     return ["src"];
   }
 
+  static utils = {
+    formatEmojis,
+    formatDate: (date) => dateTimeFormatter.format(new Date(date)),
+    icons,
+  };
+
   connectedCallback() {
-    const lang = this.closest("[lang]")?.lang || "en";
+    const lang = this.closest("[lang]")?.lang || navigator.language || "en";
 
     this.dateTimeFormatter = new Intl.DateTimeFormat(lang, {
       dateStyle: "medium",
@@ -22,9 +44,9 @@ export default class Mastodon extends HTMLElement {
   async fetchComments(url) {
     const { origin, pathname } = new URL(url);
     const [_, id] = pathname.match(/\/(\d+)$/);
-    const api_url = `${origin}/api/v1/statuses/${id}/context`;
-    const response = await fetch(api_url);
-    const data = await response.json();
+    const data = await Mastodon.fetch(
+      new URL(`${origin}/api/v1/statuses/${id}/context`),
+    );
 
     // Sort data
     const comments = new Map();
@@ -48,15 +70,11 @@ export default class Mastodon extends HTMLElement {
 
   render(container, replies) {
     const ul = document.createElement("ul");
-    const utils = {
-      formatEmojis,
-      formatDate: (date) => this.dateTimeFormatter.format(new Date(date)),
-    };
 
     for (const reply of replies) {
       const comment = document.createElement("li");
 
-      comment.innerHTML = Mastodon.renderComment(reply.comment, utils);
+      comment.innerHTML = Mastodon.renderComment(reply.comment);
 
       if (reply.replies.length) {
         this.render(comment, reply.replies);
@@ -67,11 +85,17 @@ export default class Mastodon extends HTMLElement {
     container.appendChild(ul);
   }
 
-  static renderComment(comment, utils) {
+  static async fetch(url) {
+    const response = await fetch(url);
+    return await response.json();
+  }
+
+  static renderComment(comment) {
     const { account } = comment;
+    const { utils } = Mastodon;
 
     return `
-        <article id="comment-${comment.id}">
+        <article class="comment" id="comment-${comment.id}">
           <footer class="comment-footer">
             <a href="${account.url}" class="comment-user">
               <img class="comment-avatar" src="${account.avatar_static}" alt="${account.display_name}'s avatar" width="200" height="200">
@@ -90,7 +114,19 @@ export default class Mastodon extends HTMLElement {
           </footer>
           <div class="comment-body">
             ${utils.formatEmojis(comment.content, comment.emojis)}
-            ${comment.favourites_count ? `♥️ ${comment.favourites_count}` : ""}
+
+            <p class="comment-counts">
+              ${
+      comment.reblogs_count
+        ? `<span>${utils.icons.reblog} ${comment.reblogs_count}</span>`
+        : ""
+    }
+              ${
+      comment.favourites_count
+        ? `<span>${utils.icons.favourite} ${comment.favourites_count}</span>`
+        : ""
+    }
+            </p>
           </div>
         </article>
       `;
