@@ -1,0 +1,29 @@
+{
+  "name": "@oom/mastodon-comments",
+  "version": "1.0.0",
+  "description": " Web component to show comments from mastodon ",
+  "browser": "src/comments.js",
+  "modules.root": "src",
+  "files": [
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oom-components/mastodon-comments.git"
+  },
+  "keywords": [
+    "progressive",
+    "web",
+    "component",
+    "mastodon",
+    "comments",
+    "custom element",
+    "es6"
+  ],
+  "author": "Oscar Otero <oom@oscarotero.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oom-components/mastodon-comments/issues"
+  },
+  "homepage": "https://github.com/oom-components/mastodon-comments#readme"
+}
