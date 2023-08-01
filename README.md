@@ -1,7 +1,7 @@
 # Mastodon comments
 
 Web component to show comments from Mastodon. Inspired by the work of
-[Thiago Cerqueira](https://thiagojedi.github.io/blog/activitypub-comments/).
+[Thiago Cerqueira](https://thiagojedi.github.io/blog/activitypub-comments/) who has inspired by [Julian Fietkau](https://fietkau.blog/2023/another_blog_resurrection_fediverse_new_comment_system), who has inspired by [Cassidy James](https://cassidyjames.com/blog/fediverse-blog-comments-mastodon/), who also was inspired by [Jan Wildeboer](https://jan.wildeboer.net/2023/02/Jekyll-Mastodon-Comments/) who was inspired by [Yidhra Farm](https://yidhra.farm/tech/jekyll/2022/01/03/mastodon-comments-for-jekyll.html), who was inspired by [Joel Chrono](https://joelchrono12.xyz/blog/how-to-add-mastodon-comments-to-jekyll-blog/) who was inspired by [Carl Schwan](https://carlschwan.eu/2020/12/29/adding-comments-to-your-static-blog-with-mastodon/).
 
 - No dependencies
 - Light: less than 200 lines of code (including comments and spaces)
