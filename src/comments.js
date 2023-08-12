@@ -56,6 +56,10 @@ export default class Mastodon extends HTMLElement {
     comments.set(id, root);
 
     for (const toot of data.descendants) {
+      if (toot.visibility !== "public") {
+        continue;
+      }
+
       const comment = {
         comment: toot,
         replies: [],
