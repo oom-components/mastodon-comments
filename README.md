@@ -27,7 +27,8 @@ who was inspired by
 Write the following HTML code with a link to a post from Mastodon:
 
 ```html
-<oom-comments src="https://mastodon.gal/@thomasorus@merveilles.town/109975397915125907">
+<oom-comments src="https://mastodon.gal/@misteroom/110810445656343599">
+  No comments yet
 </oom-comments>
 ```
 
@@ -38,7 +39,7 @@ Register the custom element:
 ```js
 import Comments from "./mastodon-comments/comments.js";
 
-//Register the custom element
+//Register the custom element with your desired name
 customElements.define("oom-comments", Comments);
 ```
 
@@ -63,32 +64,20 @@ Comments.renderComment = function (comment, utils) {
   // your render here
 };
 
-//Register the custom element
+//Register the custom element with your desired name
 customElements.define("oom-comments", Comments);
 ```
 
 ## Cache
 
-It's also possible to cache the API requests by overriding the default `fetch`
-static function:
+Use the `cache` attribute to cache the API responses. It accepts a number with
+the time in seconds. The cache is also used offline.
 
-```js
-import Comments from "./mastodon-comments/comments.js";
-
-// Use Web Cache API (https://developer.mozilla.org/en-US/docs/Web/API/Cache)
-Comments.fetch = function (url) {
-  const cache = await caches.open("mastodon-comments");
-  const cached = await cache.match(url);
-
-  if (cached) {
-    return cached.json();
-  }
-
-  const response = await fetch(url);
-  await cache.put(url, response.clone());
-  return await response.json();
-};
-
-//Register the custom element
-customElements.define("oom-comments", Comments);
+```html
+<!-- Cache for 1 minute (60 seconds) -->
+<oom-comments
+  cache="60"
+  src="https://mastodon.gal/@misteroom/110810445656343599">
+  No comments yet.
+</oom-comments>
 ```

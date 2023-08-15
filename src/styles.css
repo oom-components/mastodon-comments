@@ -1,5 +1,3 @@
-@import "https://unpkg.com/modern-normalize@2.0.0/modern-normalize.css";
-
 oom-comments {
   display: block;
   padding: 2em;
@@ -30,6 +28,17 @@ oom-comments .comment-user {
   color: currentColor;
   text-decoration: none;
   display: block;
+  position: relative;
+}
+oom-comments .comment-author {
+  position: absolute;
+  left: 35px;
+  top: 35px;
+  background: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  color: gray;
 }
 oom-comments .comment-user:hover .comment-username {
   text-decoration: underline;
