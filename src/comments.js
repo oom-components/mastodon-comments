@@ -46,12 +46,17 @@ export default class Mastodon extends HTMLElement {
   async fetchComments(url) {
     const tootUrl = new URL(url);
     const { origin, pathname } = tootUrl;
-
-    let [_, id] = pathname.match(/\/(\d+)$/);
+    let id;
 
     // In case it’s a a Pleroma server, with /notice/ URLs.
-      if (pathname.includes("/notice/")) {
-        [, id] = pathname.match(/^\/notice\/([^\/?#]+)/);
+    if (pathname.includes("/notice/")) {
+      [, id] = pathname.match(/^\/notice\/([^\/?#]+)/);
+    } else {
+      [, id] = pathname.match(/\/(\d+)$/);
+    }
+
+    if (!id) {
+      return;
     }
 
     const data = await Mastodon.fetch(
@@ -84,11 +89,13 @@ export default class Mastodon extends HTMLElement {
     const user = tootUrl.pathname.split("/")[1];
     const account = `${user}@${tootUrl.hostname}`;
 
-    this.render(this, root.replies, account);
+    if (root.replies.length) {
+      this.innerHTML = "";
+      this.render(this, root.replies, account);
+    }
   }
 
   render(container, replies, account) {
-    this.innerHTML = "";
     const ul = document.createElement("ul");
 
     for (const reply of replies) {
