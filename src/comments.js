@@ -46,7 +46,14 @@ export default class Mastodon extends HTMLElement {
   async fetchComments(url) {
     const tootUrl = new URL(url);
     const { origin, pathname } = tootUrl;
-    const [_, id] = pathname.match(/\/(\d+)$/);
+
+    let [_, id] = pathname.match(/\/(\d+)$/);
+
+    // In case it’s a a Pleroma server, with /notice/ URLs.
+      if (pathname.includes("/notice/")) {
+        [, id] = pathname.match(/^\/notice\/([^\/?#]+)/);
+    }
+
     const data = await Mastodon.fetch(
       new URL(`${origin}/api/v1/statuses/${id}/context`),
       Number(this.getAttribute("cache") || 0),
