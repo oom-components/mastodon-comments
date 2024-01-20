@@ -113,6 +113,10 @@ export default class Mastodon extends HTMLElement {
   }
 
   static async fetch(url, ttl) {
+    if (typeof caches === "undefined") {
+      return await (await fetch(url)).json();
+    }
+
     const cache = await caches.open("mastodon-comments");
     let cached = await cache.match(url);
 
