@@ -61,7 +61,7 @@ export default class Mastodon extends HTMLElement {
 
     const data = await Mastodon.fetch(
       new URL(`${origin}/api/v1/statuses/${id}/context`),
-      Number(this.getAttribute("cache") || 0),
+      this,
     );
 
     // Sort data
@@ -112,9 +112,16 @@ export default class Mastodon extends HTMLElement {
     container.appendChild(ul);
   }
 
-  static async fetch(url, ttl) {
+  static async fetch(url, element) {
+    const ttl = Number(this.getAttribute("cache") || 0);
+    const token = this.getAttribute("token");
+    const headers = new Headers();
+    if (token) {
+      headers.set("Authorization", `Bearer ${token}`);
+    }
+
     if (typeof caches === "undefined") {
-      return await (await fetch(url)).json();
+      return await (await fetch(url), { headers }).json();
     }
 
     const cache = await caches.open("mastodon-comments");
@@ -130,7 +137,7 @@ export default class Mastodon extends HTMLElement {
     }
 
     try {
-      const response = await fetch(url);
+      const response = await fetch(url, { headers });
       const body = await response.json();
 
       cached = new Response(JSON.stringify(body));
