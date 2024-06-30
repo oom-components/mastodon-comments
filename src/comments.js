@@ -113,8 +113,8 @@ export default class Mastodon extends HTMLElement {
   }
 
   static async fetch(url, element) {
-    const ttl = Number(this.getAttribute("cache") || 0);
-    const token = this.getAttribute("token");
+    const ttl = Number(element.getAttribute("cache") || 0);
+    const token = element.getAttribute("token");
     const headers = new Headers();
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
