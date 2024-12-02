@@ -55,7 +55,7 @@ oom-comments .comment-time {
   font-size: small;
   display: flex;
   align-items: center;
-  column-gap: .4em;
+  column-gap: 0.4em;
 }
 oom-comments .comment-time svg {
   width: 1em;
