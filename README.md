@@ -15,7 +15,7 @@ who was inspired by
 who was inspired by
 [Carl Schwan](https://carlschwan.eu/2020/12/29/adding-comments-to-your-static-blog-with-mastodon/).
 
-Recently I included support for Bluesky. Thanks to Andy for the idea and for [let me borrow his code](https://mastodon.gal/@pixel@desu.social/113569049052739770).
+Recently I included support for Bluesky. Thanks to [Andy](https://pixelde.su/) for the idea and for [let me borrow his code](https://mastodon.gal/@pixel@desu.social/113569049052739770).
 
 - No dependencies
 - Light: ~300 lines of code (including comments and spaces)
