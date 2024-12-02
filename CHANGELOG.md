@@ -4,9 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
-## [0.2.3] - Unreleased
+## [0.3.0] - 2024-12-02
+In this new version, the component was evolved to support comments from different platforms like Mastodon and Bluesky mixed.
+
 ### Added
-- Support for gotosocial that requires an API token.
+- Added `token` for servers like gotosocial that requires an API token.
+- Added `bluesky` attribute to fetch comments from Bluesky API.
+- Added `mastodon` attribute to fetch comments from Mastodon-like servers. The former `src` attribute is keep as an alias for backward compatibility.
+- Added the social media icon.
 
 ## [0.2.2] - 2024-01-20
 ### Fixed
@@ -17,7 +22,7 @@ project adheres to [Semantic Versioning](http://semver.org/).
 - Support for Pleroma [#1].
 
 ### Changed
-- Don't empty the component content if there're no comments.
+- Don't empty the component content if there's no comments.
 
 ## [0.2.0] - 2023-08-15
 ### Added
@@ -36,7 +41,7 @@ First version
 [#1]: https://github.com/oom-components/mastodon-comments/issues/1
 [#2]: https://github.com/oom-components/mastodon-comments/issues/2
 
-[0.2.3]: https://github.com/oom-components/mastodon-comments/compare/v0.2.2...HEAD
+[0.3.0]: https://github.com/oom-components/mastodon-comments/compare/v0.2.2...v0.3.0
 [0.2.2]: https://github.com/oom-components/mastodon-comments/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/oom-components/mastodon-comments/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/oom-components/mastodon-comments/compare/v0.1.0...v0.2.0
