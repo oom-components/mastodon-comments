@@ -44,14 +44,14 @@ export default class SocialComments extends HTMLElement {
     const comments = [
       ...this.comments.mastodon || [],
       ...this.comments.bluesky || [],
-    ];
-
-    const sorted = comments.sort(
+    ].sort(
       (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
     );
 
-    this.innerHTML = "";
-    this.render(this, sorted);
+    if (comments.length) {
+      this.innerHTML = "";
+      this.render(this, comments);
+    }
   }
 
   async #fetchBluesky(url) {
