@@ -1,7 +1,7 @@
 {
   "name": "@oom/mastodon-comments",
-  "version": "0.3.1",
-  "description": " Web component to show comments from mastodon and bluesky",
+  "version": "0.3.2",
+  "description": "Web component to show comments from Mastodon and Bluesky",
   "browser": "src/comments.js",
   "modules.root": "src",
   "files": [
