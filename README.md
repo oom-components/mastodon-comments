@@ -1,3 +1,8 @@
+> [!warning]
+>
+> this project has moved to Codeberg: https://codeberg.org/oom-components/social-comments
+
+
 # Mastodon comments
 
 Web component to show comments from Mastodon. Inspired by the work of
